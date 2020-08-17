@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context 'Friendship' do
+  context 'Associations' do
     it 'has many posts' do
       assc = User.reflect_on_association(:posts)
       expect(assc.macro).to eq :has_many
