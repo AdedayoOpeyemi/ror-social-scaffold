@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_08_17_165303) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"
@@ -26,8 +23,8 @@ ActiveRecord::Schema.define(version: 2020_08_17_165303) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.bigint "requester_id"
-    t.bigint "requestee_id"
+    t.integer "requester_id"
+    t.integer "requestee_id"
     t.string "status", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -65,6 +62,4 @@ ActiveRecord::Schema.define(version: 2020_08_17_165303) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "friendships", "users", column: "requestee_id"
-  add_foreign_key "friendships", "users", column: "requester_id"
 end
