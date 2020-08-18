@@ -78,4 +78,11 @@ class User < ApplicationRecord
 
     false
   end
+
+  def not_friend_with?(user)
+    requester = Friendship.where(friend_id: id, user_id: user.id).first
+    requestee = Friendship.where(user_id: id, friend_id: user.id).first
+
+    !requester && !requestee
+  end
 end
