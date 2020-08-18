@@ -17,14 +17,14 @@ RSpec.describe User, type: :model do
       expect(assc.macro).to eq :has_many
     end
 
-    it 'has and belongs to many requested friends' do
+    it 'has many requested friends' do
       assc = User.reflect_on_association(:requested_friends)
-      expect(assc.macro).to eq :has_and_belongs_to_many
+      expect(assc.macro).to eq :has_many
     end
 
-    it 'has and belongs to many requester friends' do
+    it 'has many requester friends' do
       assc = User.reflect_on_association(:requester_friends)
-      expect(assc.macro).to eq :has_and_belongs_to_many
+      expect(assc.macro).to eq :has_many
     end
   end
 

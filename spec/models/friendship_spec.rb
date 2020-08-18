@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
   context 'Associations' do
-    it 'belongs to a requester' do
-      assc = Friendship.reflect_on_association(:requester)
+    it 'belongs to a user' do
+      assc = Friendship.reflect_on_association(:user)
       expect(assc.macro).to eq :belongs_to
     end
 
-    it 'belongs to a requestee' do
-      assc = Friendship.reflect_on_association(:requestee)
+    it 'belongs to a friend' do
+      assc = Friendship.reflect_on_association(:friend)
       expect(assc.macro).to eq :belongs_to
     end
   end
