@@ -4,8 +4,11 @@
       <li>
         Name: <%= user.name %>
         <span class="profile-link">
-          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %> |
-          <%= friendship_request_link(user) %>
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %> 
+          
+          <span class="actions approve-btn">
+            <%= friendship_request_link(user) %>
+          </span>
         </span>
       </li>
     <% end %>
