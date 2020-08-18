@@ -20,4 +20,12 @@ RSpec.feature 'Friendship Requests', type: :feature do
 
     expect(@user2.received_requests.include?(@user1)).to be true
   end
+
+  scenario 'Viewing frienship request', type: :feature do
+    @user2.request_friendship(@user1)
+    visit root_path
+    expect(page).to have_link 'Friendship requests', href: friendship_requests_path
+    click_link 'Friendship requests', href: friendship_requests_path
+    expect(page).to have_link 'See Profile', href: user_path(@user2)
+  end
 end

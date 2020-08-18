@@ -17,4 +17,8 @@ class UsersController < ApplicationController
 
     redirect_back fallback_location: '/'
   end
+
+  def friendship_requests
+    @users = current_user.received_requests
+  end
 end
