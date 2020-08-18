@@ -19,6 +19,23 @@ class UsersController < ApplicationController
   end
 
   def friendship_requests
+    # console
     @users = current_user.received_requests
+  end
+
+  def approve_request
+    @user = User.find(params[:id])
+
+    current_user.approve_requester(@user) unless @user.nil?
+
+    redirect_back fallback_location: '/'
+  end
+
+  def decline_request
+    @user = User.find(params[:id])
+
+    current_user.decline_requester(@user) unless @user.nil?
+
+    redirect_back fallback_location: '/'
   end
 end

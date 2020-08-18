@@ -1,5 +1,6 @@
 require_relative '../rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.feature 'Friendship Requests', type: :feature do
   before :each do
     @user1 = User.create(name: 'User One', email: 'user1@mail.com', password: 'password')
@@ -28,4 +29,25 @@ RSpec.feature 'Friendship Requests', type: :feature do
     click_link 'Friendship requests', href: friendship_requests_path
     expect(page).to have_link 'See Profile', href: user_path(@user2)
   end
+
+  scenario 'Accepting a frienship request', type: :feature do
+    visit root_path
+    @user2.request_friendship(@user1)
+    expect(page).to have_link 'Friendship requests', href: friendship_requests_path
+    click_link 'Friendship requests', href: friendship_requests_path
+    expect(page).to have_link 'Accept', href: approve_request_path(@user2)
+    click_link 'Accept', href: approve_request_path(@user2)
+    expect(@user1.friends.include?(@user2)).to be true
+  end
+
+  scenario 'Rejecting a frienship request', type: :feature do
+    visit root_path
+    @user2.request_friendship(@user1)
+    expect(page).to have_link 'Friendship requests', href: friendship_requests_path
+    click_link 'Friendship requests', href: friendship_requests_path
+    expect(page).to have_link 'Reject', href: decline_request_path(@user2)
+    click_link 'Reject', href: decline_request_path(@user2)
+    expect(@user1.declined_requests.include?(@user2)).to be true
+  end
 end
+# rubocop:enable Metrics/BlockLength

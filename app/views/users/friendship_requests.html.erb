@@ -1,10 +1,20 @@
 <section class="users-section">
+  <% if @users.empty? %>
+    <span>You have no requests</span>
+  <% end %>
+  
   <ul class="users-list">
     <% @users.each do |user| %>
       <li>
         Name: <%= user.name %>
         <span class="profile-link">
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %> |
+          <span class="actions approve-btn">
+            <%= link_to 'Accept',  approve_request_path(user), class: 'profile-link', method: :post%>
+          </span>
+          <span class="actions decline-btn">
+            <%= link_to 'Reject',  decline_request_path(user), class: 'profile-link', method: :post %>
+          </span>
         </span>
       </li>
     <% end %>
