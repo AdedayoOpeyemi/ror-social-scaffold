@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def request_friendship
     @user = User.find(params[:id])
 
-    current_user.request_friendship(@user) unless @user.nil?
+    current_user.request_friendship(@user) unless @user.nil? && @user != current_user
 
     redirect_back fallback_location: '/'
   end
