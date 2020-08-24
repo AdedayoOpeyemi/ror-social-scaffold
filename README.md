@@ -1,15 +1,15 @@
-# Scaffold for social media app with Ruby on Rails
+# Stay In Touch 
 
-> This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
+> Simple social media application.
 
 ## Built With
 
-- Ruby v2.7.0
+- Ruby v2.6.6
 - Ruby on Rails v5.2.4
 
 ## Live Demo
 
-TBA
+[Here](https://salty-shore-99476.herokuapp.com/)
 
 
 ## Getting Started
@@ -18,7 +18,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-Ruby: 2.6.3
+Ruby: 2.6.6
 Rails: 5.2.3
 Postgres: >=9.5
 
@@ -37,8 +37,6 @@ Setup database with:
    rails db:migrate
 ```
 
-
-
 ### Usage
 
 Start server with:
@@ -55,31 +53,29 @@ Open `http://localhost:3000/` in your browser.
     bundle exec rspec
 ```
 
-> Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
-
 ### Deployment
 
-TBA
+Deployed to Heroku [here](https://salty-shore-99476.herokuapp.com/)
 
 ## Authors
 
-TBA
+👤 **Opeyemi Oyelesi**
 
-## 🤝 Contributing
+- Github: [@Adedayoopeyemi](https://github.com/Adedayoopeyemi)
+- Twitter: [@Oyelesiopy](https://twitter.com/oyelesiopy)
+- Linkedin: [linkedin](https://linkedin.com/opeyemioyelesi)
 
-Contributions, issues and feature requests are welcome!
+👤 **Osama Aldemeery**
 
-Feel free to check the [issues page](issues/).
+- Github: [@aldemeery](https://github.com/aldemeery)
+- Linkedin: [osamaaldemeery](https://linkedin.com/in/osamaaldemeery)
 
-## Show your support
+## Contributing
 
-Give a ⭐️ if you like this project!
+Bug reports and pull requests are welcome on GitHub at https://github.com/aldemeery/micro-reddit.
 
-## Acknowledgments
 
-TBA
+## License
 
-## 📝 License
-
-TBA
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
