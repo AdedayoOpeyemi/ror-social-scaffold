@@ -9,17 +9,24 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_and_belongs_to_many :requested_friends,
-                          class_name: 'User',
-                          foreign_key: 'requester_id',
-                          association_foreign_key: 'requestee_id',
-                          join_table: 'friendships'
 
-  has_and_belongs_to_many :requester_friends,
-                          class_name: 'User',
-                          foreign_key: 'requestee_id',
-                          association_foreign_key: 'requester_id',
-                          join_table: 'friendships'
+  has_many :friendships
+  has_many :inverted_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+
+  has_many :requested_friends, through: :friendships, source: :friend
+  has_many :requester_friends, through: :inverted_friendships, source: :user
+
+  # has_and_belongs_to_many :requested_friends,
+  #                         class_name: 'User',
+  #                         foreign_key: 'user_id',
+  #                         association_foreign_key: 'friend_id',
+  #                         join_table: 'friendships'
+
+  # has_and_belongs_to_many :requester_friends,
+  #                         class_name: 'User',
+  #                         foreign_key: 'friend_id',
+  #                         association_foreign_key: 'user_id',
+  #                         join_table: 'friendships'
 
   def friends
     (
@@ -53,7 +60,7 @@ class User < ApplicationRecord
   end
 
   def approve_requester(requester)
-    friendship = Friendship.where(requestee_id: id, requester_id: requester.id).first
+    friendship = Friendship.where(friend_id: id, user_id: requester.id).first
     if friendship
       friendship.approve
       return true
@@ -63,12 +70,19 @@ class User < ApplicationRecord
   end
 
   def decline_requester(requester)
-    friendship = Friendship.where(requestee_id: id, requester_id: requester.id).first
+    friendship = Friendship.where(friend_id: id, user_id: requester.id).first
     if friendship
       friendship.decline
       return true
     end
 
     false
+  end
+
+  def not_friend_with?(user)
+    requester = Friendship.where(friend_id: id, user_id: user.id).first
+    requestee = Friendship.where(user_id: id, friend_id: user.id).first
+
+    !requester && !requestee
   end
 end

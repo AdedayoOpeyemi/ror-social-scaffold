@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(version: 2020_08_17_165303) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.bigint "requester_id"
-    t.bigint "requestee_id"
+    t.bigint "user_id"
+    t.bigint "friend_id"
     t.string "status", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["requestee_id"], name: "index_friendships_on_requestee_id"
-    t.index ["requester_id", "requestee_id"], name: "index_friendships_on_requester_id_and_requestee_id", unique: true
-    t.index ["requester_id"], name: "index_friendships_on_requester_id"
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
+    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -65,6 +65,6 @@ ActiveRecord::Schema.define(version: 2020_08_17_165303) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "friendships", "users", column: "requestee_id"
-  add_foreign_key "friendships", "users", column: "requester_id"
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
 end
